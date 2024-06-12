@@ -10,15 +10,31 @@ function pedirNumero(mensaje) {
     return numero;
 }
 
+let personas = [];
+
 let cantidadGente = pedirNumero("Ingrese la cantidad de gente que fue al médico:");
 
-let cantidadAtendida;
-do {
-    cantidadAtendida = pedirNumero("Ingrese la cantidad de gente que será atendida hoy:");
-    if (cantidadAtendida > cantidadGente) {
-        alert("La cantidad de gente atendida no puede ser mayor que la cantidad de gente que fue al médico. Por favor, ingrese un número válido.");
+while(true){
+
+    let nombre = prompt("Ingrese el nombre: (o la palabra salir para terminar)");
+
+    if (nombre === "salir") {
+        break;
     }
-} while (cantidadAtendida > cantidadGente);
+
+
+    let edad = pedirNumero("Ingrese la edad :");
+
+    let persona = {
+        nombre: nombre,
+        edad: edad
+    };
+
+    personas.push(persona);
+
+}
+
+let cantidadAtendida = personas.length;
 
 function calcularPorcentaje(atendidos, total) {
     return (atendidos / total) * 100;
@@ -26,4 +42,17 @@ function calcularPorcentaje(atendidos, total) {
 
 let porcentajeAtendida = calcularPorcentaje(cantidadAtendida, cantidadGente);
 
-alert(`El porcentaje de gente que fue atendida es: ${porcentajeAtendida.toFixed(2)}%`);
+alert(` La cantidad de gente que fue al médico es de ${cantidadGente} personas y el porcentaje de gente que fue atendida es: ${porcentajeAtendida.toFixed(2)}%`);
+
+let nombreBuscar = prompt("¿Desea verificar si una persona está en el sistema? Ingrese el nombre de la persona:");
+
+let personaEncontrada = personas.find(persona => persona.nombre === nombreBuscar);
+
+if (personaEncontrada) {
+    alert(`La persona ${personaEncontrada.nombre} fue encontrada y tiene ${personaEncontrada.edad} años.`);
+} else {
+    alert(`La persona con nombre ${nombreBuscar} no fue encontrada.`);
+}
+
+
+
